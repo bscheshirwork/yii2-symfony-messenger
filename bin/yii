@@ -16,7 +16,7 @@ defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
 
 require $baseDir . '/vendor/yiisoft/yii2/Yii.php';
-Yii::setAlias('@app', $baseDir);
+Yii::setAlias('@App', $baseDir . DIRECTORY_SEPARATOR . 'src');
 
 $config = require $baseDir . '/config/console.php';
 
