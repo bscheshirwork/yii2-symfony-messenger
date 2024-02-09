@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Dotenv\Dotenv;
+
+$baseDir = dirname(__DIR__);
+
+require $baseDir . '/vendor/autoload.php';
+
+$dotenv = new Dotenv();
+$dotenv->usePutenv();
+$dotenv->load($baseDir . '/.env');
+//$dotenv->load($baseDir . '/.env.local');
+
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_ENV') or define('YII_ENV', 'dev');
+
+require $baseDir . '/vendor/yiisoft/yii2/Yii.php';
+Yii::setAlias('@app', $baseDir);
+
+$config = require $baseDir . '/config/console.php';
+
+$application = new yii\console\Application($config);
+$exitCode = $application->run();
+exit($exitCode);
