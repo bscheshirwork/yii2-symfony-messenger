@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\MessageHandler\UuidRegistrationJob;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Stamp\BusNameStamp;
 use Symfony\Component\Uid\Uuid;
@@ -15,7 +14,7 @@ final class UuidController extends Controller
 {
     public function actionIndex(): void
     {
-        $message = new UuidRegistrationJob(Uuid::v7());
+        $message = Uuid::v7();
         $stamp = new BusNameStamp('messenger.bus.default');
         $envelope = new Envelope($message, [$stamp]);
         Yii::$app->queue->push($envelope);

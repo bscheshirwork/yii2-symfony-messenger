@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Serializer\SymfonyMessageSerializer;
+use App\Queue\CliQueue;
 use yii\queue\amqp_interop\Queue;
 
 $db = require __DIR__ . '/db.php';
@@ -17,7 +17,7 @@ return [
     ],
     'components' => [
         'queue' => [
-            'class' => Queue::class,
+            'class' => CliQueue::class,
             'host' => getenv('RABBITMQ_HOST'),
             'port' => getenv('RABBITMQ_PORT'),
             'user' => getenv('RABBITMQ_USER'),
@@ -25,8 +25,6 @@ return [
             'exchangeName' => 'messages',
             'queueName' => 'messages',
             'driver' => Queue::ENQUEUE_AMQP_LIB,
-            'strictJobType' => false,
-            'serializer' => SymfonyMessageSerializer::class,
         ],
     ],
 ];
